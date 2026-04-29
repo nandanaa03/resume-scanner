@@ -6,7 +6,8 @@ import io
 
 app = Flask(__name__)
 
-OPENROUTER_API_KEY = "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"
+import os
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 def call_ai(prompt):
