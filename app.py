@@ -14,7 +14,7 @@ def call_ai(prompt):
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost:5000",
+        "HTTP-Referer": "https://resume-scanner-omega.vercel.app",
         "X-Title": "ResumeIQ"
     }
     payload = {
@@ -23,7 +23,8 @@ def call_ai(prompt):
     }
     response = requests.post(OPENROUTER_URL, headers=headers, json=payload)
     result = response.json()
-    print("OpenRouter response:", result)
+    if "choices" not in result:
+        raise Exception(f"OpenRouter error: {result}")
     return result["choices"][0]["message"]["content"]
 
 @app.route("/")
