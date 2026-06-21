@@ -1,0 +1,19 @@
+name: DevOps Sentinel Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sentinel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run DevOps Sentinel
+        uses: nandanaa03/devops-sentinel@main
+        with:
+          openrouter-api-key: ${{ secrets.OPENROUTER_API_KEY }}
